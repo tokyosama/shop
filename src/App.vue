@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <input type="text" v-model="num">
-    <button type="button" @click="num+=3">经验+3</button>
+    <button type="button" class="btn btn-primary" @click="num+=3">经验+3</button>
   </div>
 </template>
 
