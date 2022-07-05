@@ -5,6 +5,7 @@
           <p class="lead"> 当前微博热搜:{{time}}</p>
           <hr class="my-4">
           <button type="button" class="btn btn-primary btn-lg" @click="look">{{text}}</button>
+          <button type="button" class="btn btn-primary refresh mb-1" @click="refresh">刷新</button>
           <wb-hot v-for="item in data" 
           :key="item.index" 
           :title="item.title" 
@@ -64,6 +65,10 @@ export default {
     },
     goto(parms){
       window.open(parms.url)
+    },
+    refresh(){
+      this.getList()
+
     }
   
   }
@@ -78,5 +83,15 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.display-4{
+  color: #ff8200
+}
+.refresh{
+  float: right;
+  width: 60px;
+  height: 30px;
+  font-size: 12px;
+  text-align: center
 }
 </style>
