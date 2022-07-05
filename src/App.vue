@@ -1,46 +1,59 @@
 <template>
   <div id="app">
-    <span>我祝你能活</span>
-    <span class="ml-2 mr-2">{{num}}</span>
-    <span>岁</span>
-    <hr>
-    <button type="button" class="btn btn-primary" @click="rand">点击许愿</button>
-    <hr>
-    <button type="button" class="btn btn-success" @click="rands">太少</button>
-    <hr>
-    <span>您可以活</span>
-    <input type="text" v-model="ages" class="put">
-    <span>岁</span>
+      <div class="jumbotron">
+          <h1 class="display-4">微博热搜榜</h1>
+          <p class="lead"> 调用API查看当前微博热搜</p>
+          <hr class="my-4">
+          <!-- <button type="button" class="btn btn-primary btn-lg" @click="look">点击查看</button> -->
+          <wb-hot v-for="item in data" 
+          :key="item.index" 
+          :title="item.title" 
+          :hot="item.hot" 
+          :url="item.url"
+          :time="item.time"
+          @click.native="goto(item)"></wb-hot>  
+        </div>
+
   </div>
 </template>
 
 <script>
-
+import WbHot from './components/WbHot/WbHot.vue'
+import axios from 'axios'
 export default {
   name: 'App',
   data(){
     return {
-      num:0,
-      ages:0
+      data:[],
 
     }
   },
   components: {
-    
+    WbHot
+  },
+  beforeCreate(){
+
+
+  },
+  created(){
+    this.getList()
+
   },
   methods:{
-    rand(){
-      let n = 20
-      let m=60
-      this.num = Math.floor(Math.random()*(m-n+1))+n
-      return this.num
+     async getList(){
+      const {data:res} = await axios.get('https://api.vvhan.com/api/wbhot')
+      if(!res.success) return alert('sb')
+      this.data=res.data
+      // console.log(this.data)
+      
     },
-      rands(){
-      let n = 70
-      let m=150
-      this.ages = Math.floor(Math.random()*(m-n+1))+n
-      return this.ages
+    look(){
+
+    },
+    goto(parms){
+      window.open(parms.url)
     }
+  
   }
 }
 </script>
@@ -53,8 +66,5 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-}
-.put{
-  width: 40px;
 }
 </style>
