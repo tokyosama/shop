@@ -1,12 +1,12 @@
 <template>
     <div class="hello">
         <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action">
+            <div class="list-group-item list-group-item-action">
               <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">{{title}}</h5>
-                <span class="badge badge-primary badge-pill">热度:{{hot}}</span>
+                <h5 class="mb-1 t">{{title}}</h5>
               </div>
-            </a>
+              <span class="badge badge-primary badge-pill hot">热度:{{hot}}</span>
+            </div>
           </div>
   
     </div>
@@ -48,6 +48,12 @@
   }
   .badge{
     line-height: 1.8
+  }
+  .t{
+    text-align: center
+  }
+  .hot{
+    float: right;
   }
   </style>
   
