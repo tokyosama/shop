@@ -6,7 +6,6 @@
                 <h5 class="mb-1">{{title}}</h5>
                 <span class="badge badge-primary badge-pill">热度:{{hot}}</span>
               </div>
-              <small class="urlSize" pl-0>{{url}}</small>
             </a>
           </div>
   
