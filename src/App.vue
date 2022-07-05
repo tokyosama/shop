@@ -2,16 +2,16 @@
   <div id="app">
       <div class="jumbotron">
           <h1 class="display-4">微博热搜榜</h1>
-          <p class="lead"> 调用API查看当前微博热搜</p>
+          <p class="lead"> 当前微博热搜:{{time}}</p>
           <hr class="my-4">
-          <!-- <button type="button" class="btn btn-primary btn-lg" @click="look">点击查看</button> -->
+          <button type="button" class="btn btn-primary btn-lg" @click="look">{{text}}</button>
           <wb-hot v-for="item in data" 
           :key="item.index" 
           :title="item.title" 
           :hot="item.hot" 
           :url="item.url"
           :time="item.time"
-          @click.native="goto(item)"></wb-hot>  
+          @click.native="goto(item)" v-show="flag"></wb-hot>  
         </div>
 
   </div>
@@ -25,6 +25,9 @@ export default {
   data(){
     return {
       data:[],
+      time:'',
+      flag:false,
+      text:'点击查看'
 
     }
   },
@@ -43,11 +46,20 @@ export default {
      async getList(){
       const {data:res} = await axios.get('https://api.vvhan.com/api/wbhot')
       if(!res.success) return alert('sb')
+      this.time=res.time
       this.data=res.data
       // console.log(this.data)
       
     },
     look(){
+      this.flag=!this.flag
+      if(this.flag){
+        this.text='点击隐藏'
+      }
+      else{
+        this.text='点击查看'
+
+      }
 
     },
     goto(parms){
